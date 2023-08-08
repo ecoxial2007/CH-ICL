@@ -5,11 +5,11 @@
 </div>
 
 ## 💡Overview
-CH-ICL is a simple yet effective visual question answering framework, which transforms images into text using just a few trainable parameters and leverages the contextual understanding capability of LLMs to enhance the performance of existing medical VQA models. The proposed method is plug-and-play, and its effectiveness has been demonstrated on three existing medical VQA datasets.
+CH-ICL is a candidate-heuristic framework, which transforms images into text using just a few trainable parameters and leverages the contextual understanding capability of LLMs to enhance the performance of existing medical VQA models. The proposed method is plug-and-play, and its effectiveness has been demonstrated on three existing medical VQA datasets.
 
 ![overview](pic/overview.jpg)
 
-## 📔Keywords
+## 📔Pathology Terminology Dictionary
 
 The keywords of our dataset images are widely diverse, including various image types, systems and organs, diseases,
 symptoms, staining techniques, etc.
@@ -22,8 +22,8 @@ symptoms, staining techniques, etc.
 
 ### Requirement
 ```
-conda create -n chicl python=
-conda activate sevila
+conda create -n chicl python=3.8
+conda activate chicl
 pip install -r requirements.txt
 ```
 
@@ -34,9 +34,8 @@ We test our model on:
 + [SLAKE](https://www.med-vqa.com/slake/)
 + [PathVQA](https://github.com/UCSD-AI4H/PathVQA)
 
-## 📝Citation
+### 🔨Pre-trained weights
+Coming Soon.
 
-If you find this paper useful, please consider staring 🌟 this repo and citing 📑 our paper:
-```
-
-```
+## 📝Acknowledgements
+We also reference the excellent repos of BioMedCLIP(https://huggingface.co/microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224), PubMedCLIP(https://github.com/sarahESL/PubMedCLIP), in addition to other specific repos to the baselines we examined (see paper).
