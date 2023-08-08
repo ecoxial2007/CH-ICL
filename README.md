@@ -1,4 +1,6 @@
+<div align="center">
 # Candidate-Heuristic In-Context Learning: A New Framework for Enhancing MedVQA with Large Language Models
+</div>
 
 ## 💡Overview
 CH-ICL is a simple yet effective visual question answering framework, which transforms images into text using just a few trainable parameters and leverages the contextual understanding capability of LLMs to enhance the performance of existing medical VQA models. The proposed method is plug-and-play, and its effectiveness has been demonstrated on three existing medical VQA datasets.
