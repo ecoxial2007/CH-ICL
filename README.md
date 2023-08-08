@@ -38,4 +38,10 @@ We test our model on:
 Coming Soon.
 
 ## 📝Acknowledgements
-We also reference the excellent repos of BioMedCLIP(https://huggingface.co/microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224), PubMedCLIP(https://github.com/sarahESL/PubMedCLIP), in addition to other specific repos to the baselines we examined (see paper).
+We also reference the excellent repos of [BioMedCLIP](https://huggingface.co/microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224), [PubMedCLIP](https://github.com/sarahESL/PubMedCLIP), in addition to other specific repos to the baselines we examined (see paper).
+
+## 📝Citation
+If you find this paper useful, please consider staring 🌟 this repo and citing 📑 our paper:
+```
+
+```
