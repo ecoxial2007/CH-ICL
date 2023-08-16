@@ -103,7 +103,7 @@ def main(args):
                                              num_workers=args.num_workers,
                                              collate_fn=default_collate)
     if args.dataset != 'peir':
-        dset_val = ImageLanguageDataset(args, split="test")
+        dset_val = ImageLanguageDataset(args, split="val")
         dldr_val = torch.utils.data.DataLoader(dset_val,
                                                batch_size=args.batch_size,
                                                shuffle=False,
