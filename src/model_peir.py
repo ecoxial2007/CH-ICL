@@ -1,7 +1,3 @@
-"""
-Main file containing core LGVAVideoQA class code.
-"""
-
 from collections import OrderedDict
 import torch
 from torch import nn
