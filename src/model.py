@@ -1,7 +1,3 @@
-"""
-Main file containing core LGVAVideoQA class code.
-"""
-
 from collections import OrderedDict
 import torch
 from torch import nn
@@ -71,9 +67,6 @@ class LGVAModel(nn.Module):
         Feature_merge = self.linear_merge(Feature_merge).unsqueeze(dim=0)
         Feature_merge = self.mhca_m2a(Feature_merge, aFeature, aFeature).mean(dim=0)
         return Feature_merge, None, None
-        # return self.linear_merge(Feature_merge), \
-        #     self.linear_merge_image(bFeature_merge), \
-        #     self.linear_merge_query(tFeature_merge)
 
 
 
