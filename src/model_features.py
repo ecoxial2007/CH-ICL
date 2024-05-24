@@ -11,7 +11,7 @@ import json
 
 class LGVAConfig:
     cast_dtype: str = 'fp16'
-    config_path: str = 'backbone/BiomedCLIP/open_clip_config.json'
+    config_path: str = 'src/backbone/BiomedCLIP/open_clip_config.json'
 
     def __init__(self, n_ca_heads, ca_dropout, d_input, method):
         self.n_ca_heads = n_ca_heads

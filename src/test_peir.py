@@ -6,12 +6,11 @@ from torch import nn
 from torch.utils.data.dataloader import default_collate
 from model import LGVAConfig, LGVAModel
 from trainval_single_batch_get_keyword import downstream_task_forward_topk
-from loss import LabelSmoothingCrossEntropy
 
 dataset_mapping = {
-    'radvqa': 'datasets.medvqa_peir',
-    'pathvqa': 'datasets.medvqa_peir',
-    'slakevqa': 'datasets.medvqa_peir',
+    'radvqa': 'datasets.medvqa_features',
+    'pathvqa': 'datasets.medvqa_features',
+    'slakevqa': 'datasets.medvqa_features',
 }
 
 def seed_everything(seed):
@@ -93,15 +92,12 @@ def main(args):
 
     criterion = torch.nn.BCEWithLogitsLoss(reduction='sum')
     model.eval()
-    all_val_accs = []
+
     for i, batch in enumerate(dldr_test):
         with torch.no_grad():
             batch = process_batch(batch, set_to_device=device, replace_empty_with_none=True)
-            loss, accs = downstream_task_forward_topk(model, batch, criterion, args, dset_test)
-            all_val_accs.append(accs)
-    overall_acc = torch.cat(all_val_accs).mean().item()
-    log(f"test: overall_acc = {overall_acc}")
-    return
+            downstream_task_forward_topk(model, batch, criterion, args, dset_test)
+
 
 
 if __name__ == "__main__":

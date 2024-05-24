@@ -15,7 +15,7 @@ python3 src/trainval.py \
         --batch_size 256 \
         --freeze \
         --d_input 768 \
-        --method 'pubmed'
+        --method 'biomed'
 
 python3 src/trainval.py \
         --dataset 'slakevqa' \
@@ -25,7 +25,7 @@ python3 src/trainval.py \
         --freeze \
         --d_input 768 \
         --method 'biomed'
-
+#
 python3 src/trainval.py \
         --dataset 'pathvqa' \
         --data_path './data/Annotations/PathVQA' \

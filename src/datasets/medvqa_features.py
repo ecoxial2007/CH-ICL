@@ -32,7 +32,9 @@ class ImageLanguageDataset(data.Dataset):
 
         with open(os.path.join(self.data_path, f'{split}_en.json'), 'r') as jf:
             self.metadata = json.load(jf)
-        if args.method == 'pmcmed':
+        if args.method == 'biomed':
+            self.clip = ''
+        elif args.method == 'pmcmed':
             self.clip = '_pmc'
         else:
             self.clip = '_pub'
@@ -43,6 +45,17 @@ class ImageLanguageDataset(data.Dataset):
             self.answer2label = json.load(jf)
 
         self.label2answer = {value: key for key, value in self.answer2label.items()}
+
+        with open(os.path.join('./data/Annotations/PEIR', f'ans2label_en.json'), 'r') as jf:
+            self.keyword2label = json.load(jf)
+
+
+        self.label2keyword = {value: key for key, value in self.keyword2label.items()}
+        self.num_classes = len(self.label2keyword)
+        self.keyword_features = h5py.File(os.path.join('./data/PEIR', f'text_features.h5'), 'r')
+        self.keyword_features = torch.tensor(self.keyword_features['label_features'], dtype=torch.float32)
+
+
 
         image_ids = []
         for f in self.metadata:

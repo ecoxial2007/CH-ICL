@@ -37,15 +37,14 @@ class ImageLanguageDataset(data.Dataset):
         self.text_features = h5py.File(os.path.join(self.feature_path, f'text_features{self.clip}.h5'), 'r')
         self.text_cands_features = torch.tensor(self.text_features['label_features'], dtype=torch.float32)
 
-        with open(os.path.join(self.data_path, f'ans2label_en.json'), 'r') as jf:
-            self.answer2label = json.load(jf)
 
-        self.label2answer = {value: key for key, value in self.answer2label.items()}
         ###### keyword
         with open(os.path.join('./data/Annotations/PEIR', f'ans2label_en.json'), 'r') as jf:
             self.keyword2label = json.load(jf)
-        self.label2keyword = {value: key for key, value in self.keyword2label.items()}
 
+
+        self.label2keyword = {value: key for key, value in self.keyword2label.items()}
+        self.num_classes = len(self.label2keyword)
         self.keyword_features = h5py.File(os.path.join('./data/PEIR', f'text_features.h5'), 'r')
         self.keyword_features = torch.tensor(self.keyword_features['label_features'], dtype=torch.float32)
 
@@ -54,9 +53,8 @@ class ImageLanguageDataset(data.Dataset):
             image_ids.append(f['img_id'])
         self.image_ids = list(set(image_ids))
         print(self.split, len(self.metadata))
-        print('num_classes', len(self.answer2label))
+        print('num_classes', self.num_classes)
         print('num_images', len(self.image_ids))
-        self.num_keywords = len(self.keyword2label)
 
 
     def __len__(self):
@@ -70,30 +68,34 @@ class ImageLanguageDataset(data.Dataset):
         f = self.metadata[index]
         qid = int(f['qid'])
         image_id = f['img_id']
-        image_id = os.path.splitext(image_id)[0]
-        question = f['question']
-        answer = str(f['answer'])
-        atype = f["answer_type"]
 
-        labels_id = torch.tensor(self.answer2label[answer], dtype=torch.long)
-        image_path = os.path.join(self.feature_path, 'images', image_id+'.jpg')
-        image = self.preprocess_val(Image.open(image_path))
 
-        text_query_features = torch.tensor(self.text_features['question_tokens'][qid], dtype=torch.float32)
-        text_query_features_global = torch.tensor(self.text_features['question_features'][qid], dtype=torch.float32)
+        image_path = os.path.join(self.feature_path, 'images', image_id)
+        image_feature_path = image_path.replace('images', f'features{self.clip}').replace('.jpg', '.h5')
 
-        item_dict = {
-            'image': image,
-            'text_query_features': text_query_features_global,
-            'text_query_token_features': text_query_features,
-            'text_cands_features': self.keyword_features,
-            'labels_id': labels_id,
-        }
+
+        image_features_file = h5py.File(image_feature_path, 'r')
+
+        image_features = torch.tensor(np.array(image_features_file['feature']), dtype=torch.float32)  # (L_video, D_in); L_video >> L
+        patch_features = torch.tensor(np.array(image_features_file['feature_noproj']), dtype=torch.float32)  # (L_video, D_in); L_video >> L
+
+
+
 
         if self.visible:
-            item_dict.update({
-                'additional_info': (image_id, question, qid, answer),
-                'atype': atype
-            })
-
+            item_dict = {
+                'image_features': image_features,
+                'patch_features': patch_features,
+                'text_cands_features': self.text_cands_features
+            }
+        else:
+            labels_id = torch.tensor(f['match_id'])
+            labels_matrix = torch.zeros(self.num_classes)
+            labels_matrix.scatter_(0, labels_id, 1)
+            item_dict = {
+                'image_features': image_features,
+                'patch_features': patch_features,
+                'text_cands_features': self.text_cands_features,
+                'labels_matrix': labels_matrix,
+            }
         return item_dict

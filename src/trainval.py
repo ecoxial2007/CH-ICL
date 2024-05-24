@@ -1,5 +1,7 @@
-import glob
 import os
+import sys
+sys.path.append('./')
+import glob
 import numpy as np
 import random
 import torch
@@ -9,10 +11,10 @@ from trainval_single_batch import downstream_task_forward
 from loss import LabelSmoothingCrossEntropy
 
 dataset_mapping = {
-    'radvqa': 'datasets.medvqa_features',
-    'pathvqa': 'datasets.medvqa_features',
-    'slakevqa': 'datasets.medvqa_features',
-    'peir': 'datasets.peir'
+    'radvqa': 'src.datasets.medvqa_features',
+    'pathvqa': 'src.datasets.medvqa_features',
+    'slakevqa': 'src.datasets.medvqa_features',
+    'peir': 'src.datasets.medvqa_peir'
 }
 # dataset_mapping = {
 #     'radvqa': 'datasets.medvqa',
@@ -64,12 +66,9 @@ def process_batch(batch, set_to_device=None, replace_empty_with_none=False):
 def main(args):
     seed_everything(args.seed)
     if args.dataset == 'peir':
-        from model_peir import LGVAModel
+        from model_peir import LGVAConfig, LGVAModel
     else:
-        if args.method == 'biomed':
-            from model import LGVAConfig, LGVAModel
-        else:
-            from model_features import LGVAConfig, LGVAModel
+        from model_features import LGVAConfig, LGVAModel
 
 
     # create LGVAConfig from model hyperparameters
@@ -78,9 +77,12 @@ def main(args):
 
     model = LGVAModel(config, device).to(device)
     # Assuming model.backbone exists and you want to freeze it
-    if args.method == 'biomed' and args.freeze:
-        for param in model.backbone.parameters():
-            param.requires_grad = False
+    try:
+        if args.method == 'biomed' and args.freeze:
+            for param in model.backbone.parameters():
+                param.requires_grad = False
+    except:
+        pass
 
     total_params = sum(p.numel() for p in model.parameters())
     trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)

@@ -4,22 +4,16 @@ import random
 import torch
 from torch import nn
 from torch.utils.data.dataloader import default_collate
-from model import LGVAConfig, LGVAModel
 from trainval_single_batch import downstream_task_forward_topk
 from loss import LabelSmoothingCrossEntropy
 
+
 dataset_mapping = {
-    'radvqa': 'datasets.medvqa',
-    'pathvqa': 'datasets.medvqa',
-    'slakevqa': 'datasets.medvqa',
+    'radvqa': 'datasets.medvqa_features',
+    'pathvqa': 'datasets.medvqa_features',
+    'slakevqa': 'datasets.medvqa_features',
     'peir': 'datasets.peir'
 }
-# dataset_mapping = {
-#     'radvqa': 'datasets.medvqa_features',
-#     'pathvqa': 'datasets.medvqa_features',
-#     'slakevqa': 'datasets.medvqa_features',
-#     'peir': 'datasets.peir'
-# }
 def seed_everything(seed):
     torch.manual_seed(seed)
     np.random.seed(seed)
@@ -63,12 +57,10 @@ def process_batch(batch, set_to_device=None, replace_empty_with_none=False):
 def main(args):
     seed_everything(args.seed)
     if args.dataset == 'peir':
-        from model_peir import LGVAModel
+        from model_peir import LGVAModel, LGVAConfig
     else:
-        if args.method == 'pubmed' or args.method == 'pmcmed':
-            from model_features import LGVAConfig, LGVAModel
-        else:
-            from model import LGVAConfig, LGVAModel
+        from model_features import LGVAConfig, LGVAModel
+
     # create LGVAConfig from model hyperparameters
     config = LGVAConfig.from_args(args)
     device = torch.device("cuda")
