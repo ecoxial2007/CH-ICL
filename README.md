@@ -50,7 +50,7 @@ Note: We recommend using our pre-extracted BioMedCLIP features. The original ima
 
 | Dataset  | Pre-extracted Features  & Original Images |
 |----------|------------------------------------------|
-| PEIR     | [Baiduyun](https://pan.baidu.com/s/1irJVK6i38HIUIASMXq9uog?pwd=6666)|
+| PEIR     | [Baiduyun, Rename zzz2zip](https://pan.baidu.com/s/1sJp_3UzjIIvOiuyMB417GQ?pwd=6666)|
 | PathVQA  | [Baiduyun](https://pan.baidu.com/s/1b1SuDSbsNM1rVGzbx8utvg?pwd=6666)|
 | Slake    | [Baiduyun](https://pan.baidu.com/s/1mfAoi9_HZkrk7OuyQIn4-w?pwd=6666)|
 | RADVQA   | [Baiduyun](https://pan.baidu.com/s/1gBjAjq2L-iIMf0j05QsJ-w?pwd=6666)|
