@@ -51,6 +51,7 @@ Note: We recommend using our pre-extracted BioMedCLIP features. The original ima
 | Dataset  | Pre-extracted Features  & Original Images |
 |----------|------------------------------------------|
 | PEIR     | [Baiduyun, Rename zzz2zip](https://pan.baidu.com/s/1sJp_3UzjIIvOiuyMB417GQ?pwd=6666)|
+| PEIR BioMedCLIP features & keyword & GPT3.5 rewrite caption | [Baiduyun](https://pan.baidu.com/s/1pqHhrxLL-ZdgEat0wNwLmQ?pwd=6666)|
 | PathVQA  | [Baiduyun](https://pan.baidu.com/s/1b1SuDSbsNM1rVGzbx8utvg?pwd=6666)|
 | Slake    | [Baiduyun](https://pan.baidu.com/s/1mfAoi9_HZkrk7OuyQIn4-w?pwd=6666)|
 | RADVQA   | [Baiduyun](https://pan.baidu.com/s/1gBjAjq2L-iIMf0j05QsJ-w?pwd=6666)|
@@ -117,5 +118,13 @@ We also reference the excellent repos of [BioMedCLIP](https://huggingface.co/mic
 ## 📝Citation
 If you find this paper useful, please consider staring 🌟 this repo and citing 📑 our paper:
 ```
-
+@article{Liang2024CandidateHeuristicIL,
+  title={Candidate-Heuristic In-Context Learning: A new framework for enhancing medical visual question answering with LLMs},
+  author={Xiao Liang and Di Wang and Haodi Zhong and Quan Wang and Ronghan Li and Rui Jia and Bo Wan},
+  journal={Inf. Process. Manag.},
+  year={2024},
+  volume={61},
+  pages={103805},
+  url={https://api.semanticscholar.org/CorpusID:270671790}
+}
 ```
