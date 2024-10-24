@@ -60,7 +60,7 @@ Note: We recommend using our pre-extracted BioMedCLIP features. The original ima
 ### Training and Validation:
 Below are the pre-trained keyword and VQA weights:
 + [PEIR(keyword)](https://pan.baidu.com/s/1pM6CJMAz2SaAvphZ6vjU-w?pwd=6666)
-+ [VQA models]()
++ [VQA models](https://pan.baidu.com/s/1u3wDTBqokg_x1hrk5J62VA?pwd=6666)
 
 
 
