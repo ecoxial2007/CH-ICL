@@ -4,7 +4,7 @@ import random
 import torch
 from torch import nn
 from torch.utils.data.dataloader import default_collate
-from model import LGVAConfig, LGVAModel
+from model_peir import LGVAConfig, LGVAModel
 from trainval_single_batch_get_keyword import downstream_task_forward_topk
 
 dataset_mapping = {
@@ -138,3 +138,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     main(args)
+
